@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MySqlConnector;
+using server.Services;
 
 namespace dungeon_noter;
 
@@ -33,6 +34,10 @@ public class Startup
 
     services.AddScoped<AccountsRepository>();
     services.AddScoped<AccountService>();
+    services.AddScoped<NotebooksRepository>();
+    services.AddScoped<NotebooksService>();
+    services.AddScoped<EntriesRepository>();
+    services.AddScoped<EntriesService>();
   }
 
   private void ConfigureCors(IServiceCollection services)
