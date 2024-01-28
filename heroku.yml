@@ -1,0 +1,5 @@
+build:
+  config:
+    stack: container
+  docker:
+    web: server/Dockerfile
