@@ -57,7 +57,8 @@ public class EntriesRepository(IDbConnection db)
       nb.*
       FROM entries e 
       LEFT JOIN notebooks nb ON nb.id = e.notebookId
-      WHERE e.creatorId = @userId;";
+      WHERE e.creatorId = @userId
+      ORDER BY e.updatedAt DESC;";
 
       List<Entry> entries = _db.Query<Entry, Notebook, Entry>(sql, populateNotebook, new{userId}).ToList();
       return entries;
@@ -97,7 +98,8 @@ public class EntriesRepository(IDbConnection db)
         nb.*
       FROM entries e 
       LEFT JOIN notebooks nb ON nb.id = e.notebookId
-      WHERE e.notebookId = @notebookId;";
+      WHERE e.notebookId = @notebookId
+      ORDER BY e.updatedAT DESC;";
 
       List<Entry> entries = _db.Query<Entry, Notebook, Entry>(sql, populateNotebook, new{notebookId}).ToList();
       return entries;

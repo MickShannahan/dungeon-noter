@@ -31,5 +31,12 @@ export const logger = {
   },
   trace() {
     log('trace', arguments)
+  },
+  table(title, data){
+    if(!dev)return
+    console.group(title)
+    data =Array.isArray(data) ? data : [data]
+    console.table(data)
+    console.groupEnd(title)
   }
 }

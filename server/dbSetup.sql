@@ -1,11 +1,11 @@
-CREATE TABLE IF NOT EXISTS accounts(
+CREATE TABLE IF NOT EXISTS dungeon_noter_accounts(
   id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   name varchar(255) COMMENT 'User Name',
   email varchar(255) COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture'
-) default charset utf8 COMMENT '';
+) default charset utf8 COMMENT 'utf8mb4';
 
 
 CREATE TABLE notebooks(
@@ -17,8 +17,8 @@ CREATE TABLE notebooks(
   icon VARCHAR(50) NOT NULL,
   color VARCHAR(10) NOT NULL,
   creatorId VARCHAR(255) NOT NULL,
-  Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
-)default charset utf8 COMMENT '';
+  Foreign Key (creatorId) REFERENCES dungeon_noter_accounts (id) ON DELETE CASCADE
+)default charset utf8 COMMENT 'utf8mb4';
 
 CREATE TABLE entries(
   id VARCHAR(36) NOT NULL PRIMARY KEY,
@@ -28,7 +28,7 @@ CREATE TABLE entries(
   img VARCHAR(500),
   notebookId VARCHAR(36),
   creatorId VARCHAR(255) NOT NULL
-)default charset utf8 COMMENT '';
+)default charset utf8 COMMENT 'utf8mb4';
 
 SELECT
     notebooks.*,

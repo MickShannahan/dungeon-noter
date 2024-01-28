@@ -28,7 +28,7 @@ public class EntriesService (EntriesRepository repo, NotebooksService notebooksS
       if(original.CreatorId != userId) throw new HttpRequestException("Not Authorized to Delete", null, HttpStatusCode.Forbidden);
 
       _repo.DeleteEntry(entryId);
-      return $"${original.Description.Substring(0,10)}Entry Deleted";
+      return $"Entry Deleted";
     }
 
     internal List<Entry> GetNotebookEntries(string notebookId)

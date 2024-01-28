@@ -20,9 +20,9 @@ public class NotebooksRepository(IDbConnection db)
         SELECT
           notebooks.*,
           COUNT(entries.id) AS entryCount,
-          accounts.*
+          dungeon_noter_accounts.*
         from notebooks
-        JOIN accounts ON accounts.id = notebooks.creatorId
+        JOIN dungeon_noter_accounts ON dungeon_noter_accounts.id = notebooks.creatorId
         LEFT JOIN entries ON notebooks.id = entries.notebookId
         WHERE notebooks.id = @id
         GROUP BY(notebooks.id)
@@ -36,9 +36,9 @@ public class NotebooksRepository(IDbConnection db)
          SELECT
           notebooks.*,
           COUNT(entries.id) AS entryCount,
-          accounts.*
+          dungeon_noter_accounts.*
         from notebooks
-        JOIN accounts ON accounts.id = notebooks.creatorId
+        JOIN dungeon_noter_accounts ON dungeon_noter_accounts.id = notebooks.creatorId
         LEFT JOIN entries ON notebooks.id = entries.notebookId
         GROUP BY(notebooks.id)
       ;";
@@ -51,9 +51,9 @@ public class NotebooksRepository(IDbConnection db)
         SELECT
           notebooks.*,
           COUNT(entries.id) AS entryCount,
-          accounts.*
+          dungeon_noter_accounts.*
         from notebooks
-        JOIN accounts ON accounts.id = notebooks.creatorId
+        JOIN dungeon_noter_accounts ON dungeon_noter_accounts.id = notebooks.creatorId
         LEFT JOIN entries ON notebooks.id = entries.notebookId
         WHERE notebooks.id = @notebookId
         GROUP BY(notebooks.id)
@@ -74,9 +74,9 @@ public class NotebooksRepository(IDbConnection db)
       SELECT
         notebooks.*,
         COUNT(entries.id) AS entryCount,
-        accounts.*
+        dungeon_noter_accounts.*
       from notebooks
-      JOIN accounts ON accounts.id = notebooks.creatorId
+      JOIN dungeon_noter_accounts ON dungeon_noter_accounts.id = notebooks.creatorId
       LEFT JOIN entries ON notebooks.id = entries.notebookId
       WHERE notebooks.id = @id
       GROUP BY(notebooks.id)
@@ -101,9 +101,9 @@ public class NotebooksRepository(IDbConnection db)
          SELECT
           notebooks.*,
           COUNT(entries.id) AS entryCount,
-          accounts.*
+          dungeon_noter_accounts.*
         from notebooks
-        JOIN accounts ON accounts.id = notebooks.creatorId
+        JOIN dungeon_noter_accounts ON dungeon_noter_accounts.id = notebooks.creatorId
         LEFT JOIN entries ON notebooks.id = entries.notebookId
         WHERE notebooks.creatorId = @userId
         GROUP BY(notebooks.id)
