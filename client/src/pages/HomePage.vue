@@ -16,8 +16,8 @@
       </div>
     </section>
     <section class="card-bottom bg-dark p-3 text-light">
-      <h4>Markdown Editor <i class="mdi mdi-circle-small"></i>Cloud Upload <i class="mdi mdi-circle-small"></i>Note Taker</h4>
-      <p class="p-2 text-secondary text-start">This is a demo application for a note taking app. Currently themed for taking notes for table top RPGs. Part of the note taking process is to upload images. This is done through an Azure cloud function, and the image is stored in an Azure blob storage account. To Demo the app, log in and go to the <RouterLink to="Account">Account Page</RouterLink>. To see how to set up image uploading for yourself, head to the <RouterLink to="Build">Build Page</RouterLink>.</p>
+      <h4 class="fw-bold">Cloud Upload<i class="mdi mdi-circle-small"></i>Markdown Editor<i class="mdi mdi-circle-small"></i>Note Taker</h4>
+      <p class="p-2 text-secondary text-start">This is a demo application for a note taking app. Currently themed for taking notes for the worlds greatest role-playing game. Part of the note taking process is to upload images. Files are posted to an <kbd class="text-primary">Azure</kbd> cloud function, and then stored in <kbd class="text-primary">Azure</kbd> blob storage. To Demo the app, log in and go to the <RouterLink to="Account">Account Page</RouterLink>. To see how to set up image uploading for yourself, head to the <RouterLink to="Build">Build Page</RouterLink>.</p>
     </section>
   </section>
 </div>

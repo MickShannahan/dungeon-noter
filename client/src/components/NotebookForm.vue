@@ -3,7 +3,7 @@
   <form class="row mb-4" @submit.prevent="handleSubmit()">
     <div class="mb-2 col-12">
       <label for="create-notebook-title">Title</label>
-      <input v-model="notebookData.title" type="text" class="form-control" minlength="3" maxlength="25" required>
+      <input v-model="notebookData.title" type="text" class="form-control" minlength="3" maxlength="23" required>
     </div>
     <div class="mb-2 col-7">
       <label for="create-notebook-icon">Icon</label>
@@ -40,6 +40,7 @@ import Pop from '../utils/Pop.js';
 import { notebooksService } from '../services/NotebooksService.js';
 import { Notebook } from '../models/Notebook.js';
 import { logger } from '../utils/Logger.js';
+import { Modal } from 'bootstrap';
 
 const props = defineProps({notebook: Notebook})
 
@@ -105,6 +106,8 @@ function setForm(){
 function handleSubmit(){
   if(props.notebook){
     updateNotebook()
+    Modal.getOrCreateInstance('#edit-notebook-modal').hide()
+    Pop.toast('Notebook Updated', 'info', 'bottom')
   } else {
     createNotebook()
   }
