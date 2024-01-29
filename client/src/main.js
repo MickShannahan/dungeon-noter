@@ -6,6 +6,7 @@ import App from './App.vue'
 // import { registerGlobalComponents } from './registerGlobalComponents'
 import { router } from './router'
 import './utils/SocketProvider.js'
+import 'md-editor-v3/lib/style.css';
 
 const root = createApp(App)
 async function init() {

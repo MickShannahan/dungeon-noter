@@ -15,5 +15,7 @@ export const AppState = reactive({
   /** @type {Notebook[]} */
   notebooks: [],
   /** @type {Notebook} */
-  activeNotebook: null
+  activeNotebook: null,
+  /**  @type {Entry} */
+  activeEntry: null
 })

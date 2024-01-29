@@ -1,7 +1,8 @@
 <template>
   <div :id="id" class="collapse">
     <form  class="entry-grid rounded" @submit.prevent="createEntry()">
-      <section class="spine">
+      <section class="spine vertical-text fs-5 fw-bold p-2 pt-4">
+       <i class="mdi mdi-plus"></i> New Entry
         <!-- no spine on form -->
       </section>
       <section class="entry-image p-1">
@@ -88,5 +89,8 @@ function resetForm(){
 
 
 <style lang="scss" scoped>
-
+.vertical-text{
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
 </style>

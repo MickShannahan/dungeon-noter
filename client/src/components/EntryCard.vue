@@ -10,7 +10,9 @@
   </section>
 
   <section class="entry-description p-1" :class="{'entry-description-full-width': !entryData.img}">
-    <textarea :disabled="!needsSave" v-model="entryData.description" class="form-control w-100 h-100" @keypress="needsSave = true"></textarea>
+    <div v-if="!needsSave" :id="`entry-${entry.id}-body`" class="description form-control w-100 h-100" v-html="markdown" ></div>
+    <!-- <textarea v-else   v-model="entryData.description"  ></textarea> -->
+      <MdEditor v-else v-model="entryData.description" input-box-width="100%" :footers="[]" :auto-focus="true" :scroll-auto="true" :preview="false" :toolbars="toolbar" class="form-control w-100 h-100" language="en-US"/>
   </section>
 
   <section class="spine m-1 m-sm-0" :class="{'bg-black': entry.notebook, 'bg-light': !entry.notebook}">
@@ -25,7 +27,8 @@
        <i class="mdi mdi-update me-2"></i>{{ entry.shortUpdate }}
     </div>
     <div class="w-25 text-end">
-      <button class="btn btn-light border w-100 w-sm-50" @click="needsSave = true"><i class="mdi mdi-dots-horizontal"></i></button>
+      <button class="btn btn-light border w-100 w-sm-50 d-none d-sm-inline" @click="needsSave = true"><i class="mdi mdi-dots-horizontal"></i></button>
+      <button class="btn btn-light border w-100 w-sm-50 d-sm-none d-inline" @click="openMobileEdit"><i class="mdi mdi-dots-horizontal"></i></button>
     </div>
   </section>
   <section v-else class="entry-menu p-1 d-flex align-items-baseline">
@@ -36,9 +39,9 @@
         <option v-for="notebook in notebooks" :key="`form-select-${notebook.id}`" :value="notebook.id">{{ notebook.title }}</option>
       </select>
     </div>
-    <div class="w-50 text-end">
-      <button class="btn btn-light bg-transparent w-25" @click="deleteEntry"><i class="mdi mdi-delete text-danger"></i></button>
-      <button class="btn btn-light bg-transparent w-25" @click="cancel">cancel</button>
+    <div class="w-50 text-end d-flex">
+      <button class="btn btn-light bg-transparent col" @click="deleteEntry"><i class="mdi mdi-delete text-danger"></i></button>
+      <button class="btn btn-light bg-transparent col" @click="cancel">cancel</button>
       <button class="w-50 btn btn-primary" @click="updateEntry">
         Save
       </button>
@@ -57,13 +60,18 @@ import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { entriesService } from '../services/EntriesService.js';
+import {MdEditor} from 'md-editor-v3'
 import NotebookSpine from './NotebookSpine.vue';
+import { marked } from 'marked';
+import { Modal } from 'bootstrap';
 const props = defineProps({entry: {type: Entry,  required: true}})
 const needsSave = ref(false)
 const entryData = ref({})
 const notebooks = computed(()=> AppState.notebooks)
+const markdown = ref('')
 watchEffect(()=>{
   entryData.value = {...props.entry}
+  markdown.value = marked.parse(props.entry.description)
 })
 
 async function updateEntry(){
@@ -91,7 +99,13 @@ async function deleteEntry(){
   }
 }
 
+function openMobileEdit(){
+  logger.log(props.entry)
+  AppState.activeEntry = props.entry
+  Modal.getOrCreateInstance('#entry-mobile-editor')?.show()
+}
 
+const toolbar = ['bold', 'underline','italic', 'strikeThrough', 'title', 'link', 'image', 'code', 'codeRow', 'quote', 'orderedList', 'unorderedList', 'table']
 </script>
 
 

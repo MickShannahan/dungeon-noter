@@ -8,7 +8,7 @@
       <button class="btn btn-outline-light px-4 me-2" @click="filterEntries = 'un-categorized'"><i class="mdi mdi-alert-circle-outline"></i> Un-categorized</button>
       <SearchBar class="d-none d-lg-block" @typingDone="searchFilter" @closed="searchFilter" width="30ch"/>
     </div>
-    <div class="d-flex justify-content-end">
+    <div class="col d-flex justify-content-end">
       <button v-if="collapseForm" @click="collapseForm = false" class="btn btn-outline-light px-4"><i class="mdi mdi-plus-box"></i> New</button>
       <button v-else @click="collapseForm = true" class="btn btn-outline-light px-4"><i class="mdi mdi-close-box"></i> Close</button>
     </div>

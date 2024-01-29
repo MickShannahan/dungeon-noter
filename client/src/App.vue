@@ -19,6 +19,9 @@
   <section class="bg-dark p-2 d-flex d-md-none justify-content-end">
     <Login/>
   </section>
+  <ModalWrapper id="entry-mobile-editor" size="fullscreen">
+    <MobileEntryEditor/>
+  </ModalWrapper>
 </template>
 
 <script>
@@ -28,6 +31,9 @@ import Navbar from './components/Navbar.vue'
 import OffCanvas from './components/OffCanvas.vue'
 import Login from './components/Login.vue'
 import AskBarslo from './components/AskBarslo.vue'
+import ModalWrapper from './components/ModalWrapper.vue'
+import MobileEntryEditor from './components/MobileEntryEditor.vue'
+
 
 export default {
   setup() {
@@ -35,7 +41,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar, OffCanvas, Login, AskBarslo }
+  components: { Navbar, OffCanvas, Login, AskBarslo, ModalWrapper, MobileEntryEditor }
 }
 </script>
 <style lang="scss">
