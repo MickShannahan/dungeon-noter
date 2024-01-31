@@ -6,13 +6,16 @@
         <!-- no spine on form -->
       </section>
       <section class="entry-image p-1">
-        <img :src="entryData.img || placeHolder" alt="" class="rounded">
+        <img :src="entryData.img || entryTempUrl || placeHolder " alt="" class="rounded">
       </section>
       <section class="image-upload p-1">
-        <input v-model="entryData.img" type="text" class="form-control" placeholder="Image Url">
+        <!-- REVIEW the input is type file, which no longer works with v-model, so we need to pull the file out through the onChange event. We also do not want to () so vue can pass the event through -->
+        <input @change="selectFile" type="file" multiple="false" accept="image/*" class="form-control" placeholder="Image Url">
+        <!-- <input v-model="entryData.img" type="text" class="form-control" placeholder="Image Url"> -->
       </section>
       <section class="entry-description p-1">
-        <textarea v-model="entryData.description" class="form-control w-100 h-100"></textarea>
+          <!-- <textarea   v-model="entryData.description"  ></textarea> -->
+          <MdEditor  v-model="entryData.description" input-box-width="100%" :footers="[]" :auto-focus="true" :scroll-auto="true" :preview="false" :toolbars="toolbar" class="form-control w-100 h-100" language="en-US"/>
       </section>
       <section class="entry-menu p-1 d-flex justify-content-end">
 
@@ -44,10 +47,13 @@ import { entriesService } from '../services/EntriesService.js';
 import { Notebook } from '../models/Notebook.js';
 import { logger } from '../utils/Logger.js';
 import { Collapse } from 'bootstrap';
+import { MdEditor} from 'md-editor-v3'
 
 const props = defineProps({notebook: Notebook, collapse: Boolean, id: String})
 const emit = defineEmits(['submitted'])
 const entryData = ref({})
+const entryImgFile = ref(null)
+const entryTempUrl = ref('')
 const notebooks = computed(()=> AppState.notebooks)
 
 watchEffect(()=>{
@@ -66,6 +72,8 @@ function resetForm(){
   entryData.value = {
     notebookId: props.notebook ? props.notebook.id : ''
   }
+  entryImgFile.value = null
+  entryTempUrl.value = ''
 }
   onMounted(()=>{
     resetForm()
@@ -77,7 +85,8 @@ function resetForm(){
   async function createEntry(){
     try {
       if(props.notebook) entryData.value.notebookId = props.notebook.id
-      await entriesService.createEntry(entryData.value)
+      // REVIEW similar service call but pass the image file separately
+      await entriesService.createEntry(entryData.value, entryImgFile.value)
       resetForm()
       emit('submitted')
     } catch (error) {
@@ -85,6 +94,14 @@ function resetForm(){
     }
   }
 
+  // REVIEW Ran when a file is selected, pulls the file from the input field and assigns it to it's own ref
+  function selectFile(ev){
+    const file = ev.target.files[0] // file inputs always are arrays even if multiple attribute is set to false
+    const url = URL.createObjectURL(file) // creates a url temporarily to display to the user.
+    entryImgFile.value = file
+    entryTempUrl.value = url
+  }
+  const toolbar = ['bold', 'underline','italic', 'strikeThrough', 'title', 'link', 'image', 'code', 'codeRow', 'quote', 'orderedList', 'unorderedList', 'table']
 </script>
 
 

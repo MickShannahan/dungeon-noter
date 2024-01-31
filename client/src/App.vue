@@ -59,14 +59,19 @@ main{
     display: grid;
     height: 100%;
     flex-grow: 1;
-    $flag-width: calc(100px + 3dvw);
-    grid-template-columns: $flag-width minmax(auto, 150ch) 1fr;
+    $flag-width: calc(10dvw - 20px);
+    grid-template-columns: minmax(120px, 10dvw) minmax(auto, 150ch) $flag-width;
     grid-auto-rows: max-content;
     &>*{
       grid-column: 2/3;
 
     }
   }
+  @media screen and (max-width: 990px) {
+  .container-fluid{
+    grid-template-columns: 50px 1fr 3px;
+  }
+}
   @media screen and (max-width: 768px) {
   .container-fluid{
     grid-template-columns: 3px 1fr 3px;

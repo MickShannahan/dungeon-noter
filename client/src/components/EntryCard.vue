@@ -2,11 +2,12 @@
 <div class="entry-grid">
 
   <section class="entry-image p-1">
-    <img :src="entryData.img" :alt="entry.img" class="rounded">
+    <img :src=" entryTempUrl || entryData.img" :alt="entry.img" class="rounded">
   </section>
 
   <section class="image-upload p-1">
-    <input :disabled="!needsSave" v-model="entryData.img" type="text" class="form-control" placeholder="Image Url" @change="needsSave = true">
+    <input v-if="!needsSave" disabled v-model="entry.fileName" type="text" class="form-control" placeholder="Image Url" @change="needsSave = true">
+    <input v-else @change="selectFile" type="file" multiple="false" accept="image/*" class="form-control" placeholder="Image Url">
   </section>
 
   <section class="entry-description p-1" :class="{'entry-description-full-width': !entryData.img}">
@@ -69,6 +70,8 @@ const needsSave = ref(false)
 const entryData = ref({})
 const notebooks = computed(()=> AppState.notebooks)
 const markdown = ref('')
+const entryImgFile = ref(null)
+const entryTempUrl = ref('')
 watchEffect(()=>{
   entryData.value = {...props.entry}
   markdown.value = marked.parse(props.entry.description)
@@ -76,7 +79,7 @@ watchEffect(()=>{
 
 async function updateEntry(){
   try {
-    await entriesService.updateEntry(entryData.value)
+    await entriesService.updateEntry(entryData.value, entryImgFile.value)
     needsSave.value = false
   } catch (error) {
     Pop.error(error, '[UPDATE ENTRY]')
@@ -105,6 +108,14 @@ function openMobileEdit(){
   Modal.getOrCreateInstance('#entry-mobile-editor')?.show()
 }
 
+
+ // REVIEW Ran when a file is selected, pulls the file from the input field and assigns it to it's own ref
+ function selectFile(ev){
+    const file = ev.target.files[0] // file inputs always are arrays even if multiple attribute is set to false
+    const url = URL.createObjectURL(file) // creates a url temporarily to display to the user.
+    entryImgFile.value = file
+    entryTempUrl.value = url
+  }
 const toolbar = ['bold', 'underline','italic', 'strikeThrough', 'title', 'link', 'image', 'code', 'codeRow', 'quote', 'orderedList', 'unorderedList', 'table']
 </script>
 

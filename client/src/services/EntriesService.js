@@ -1,11 +1,16 @@
 import { AppState } from "../AppState.js"
 import { Entry } from "../models/Entry.js"
 import { api } from "./AxiosService.js"
+import { imageUploadService } from "./ImageUploadService.js"
 
 class EntriesService{
 
-  async createEntry(entryData){
-    // TODO upload image?
+  async createEntry(entryData, entryImageFile){
+    // REVIEW use imageUpload service to upload image, take url from response
+    if(entryImageFile){
+      const image = await imageUploadService.uploadImage(entryImageFile)
+      entryData.img = image.url
+    }
     const res = await api.post('api/entries', entryData)
     const entry = new Entry(res.data)
     AppState.accountEntries.unshift(entry)
@@ -25,8 +30,16 @@ class EntriesService{
     AppState.notebookEntries = entries
   }
 
-  async updateEntry(entryData){
-    // TODO update image?
+  async updateEntry(entryData, entryImageFile){
+    if(entryData.img && entryImageFile){ // if there is an img and a new image, then we need to delete the old one
+      const entry = AppState.accountEntries.find(e => e.id == entryData.id)
+      await imageUploadService.deleteImage(entry.fileName)
+    }
+    if(entryImageFile){ // upload the new one
+      const image = await imageUploadService.uploadImage(entryImageFile)
+      entryData.img = image.url
+    }
+
     const res = await api.put(`api/entries/${entryData.id}`, entryData)
     const update = new Entry(res.data)
     const aIndexToUpdate = AppState.accountEntries.findIndex(e => e.id == entryData.id)
@@ -37,7 +50,10 @@ class EntriesService{
   }
 
   async deleteEntry(entryId){
-    // TODO delete image?
+    const entry = AppState.accountEntries.find(e => e.id == entryId)
+    if(entry.img){
+      await imageUploadService.deleteImage(entry.fileName)
+    }
     const res = await api.delete(`api/entries/${entryId}`)
 
     const aIndexToRemove = AppState.accountEntries.findIndex(e => e.id == entryId)
