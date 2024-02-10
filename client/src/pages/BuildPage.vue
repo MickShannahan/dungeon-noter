@@ -59,6 +59,12 @@ document.querySelector(id).scrollIntoView()
             </a>
           </div>
         </div>
+        <div class="col-12">
+          <a class="text-info" href="https://github.com/MickShannahan/cloud-upload-demo/blob/main/src/functions/imageUpload.mjs" target="_blank"><i class="mdi mdi-github"></i>Cloud Function</a>
+        </div>
+        <div class="col-12">
+          <a class="text-info" href="https://github.com/MickShannahan/dungeon_noter/blob/main/client/src/services/ImageUploadService.js" target="_blank"><i class="mdi mdi-github"></i>Client Upload</a>
+        </div>
       </div>
     </div>
     <div class="col-9 d-flex justify-content-center pt-3">
