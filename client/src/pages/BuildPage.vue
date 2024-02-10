@@ -26,7 +26,7 @@ function createLinks(){
     let h2 = headersArray[i]
     h2.id = h2.innerText.replace(/ /ig, '-')
     logger.log(h2)
-    let next = headersArray.findIndex((h,j) => h.nodeName == 'H2' && j > i ) || -1
+    let next = headersArray.findIndex((h,j) => h.nodeName == 'H2' && j > i )
     const childLinks = []
     headersArray.splice(i+1, next-i-1).forEach(c => {
       c.id = c.innerText.replace(/ |\.|\!|\?/ig, '-')

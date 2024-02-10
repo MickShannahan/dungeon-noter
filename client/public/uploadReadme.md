@@ -196,15 +196,14 @@ Right-click on the function app ⚡ again, then `Deploy to function app`. That's
 
 > 💬 It is super easy to deploy but a small note, I have had mixed results with this deployment being successful. I have clicked it once and had it work perfectly, I have done it 5 times, and failed 4 out of the 5. There is an output log that will tell you if there are issues with the project but seems like sometimes it just fails. You might just want to click deploy again if it doesn't work.
 
-## 🤷 What is next
 
-### 🚮 Deleting
+## 🚮 Deleting
 
 Well, there are a few things to do more, one is to make sure users can delete images from blob storage.  This is more or less the exact same process from before but without all the setup steps. Take a look at the function to delete an image and you will notice many similarities.
 
 We don't need to worry about auth in this case since everything is organized into folders with the user's `id`.
 
-### 📸 Improvements with Sharp
+## 📸 Improvements with Sharp
 
 Sharp is a library focused on image processing, it makes many common image processing tasks like re-sizing and compressing very easy.
 
