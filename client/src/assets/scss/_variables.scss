@@ -13,9 +13,10 @@ $light-theme: (
   "warning": #f7c32e,
   "danger": #d6293e,
   "text": #282727,
-  "light": #FFFDF9,
+  "light": #e6e3db,
   "dark": #080808,
-  "page": #FFFDF9
+  "page": #FFFDF9,
+  "poison": lime
 );
 
 $dark-theme: (
@@ -29,7 +30,8 @@ $dark-theme: (
   "light": #1d1d1d,
   "page": #0a081b,
   "dark": #030110,
-  "body-bg": #020314
+  "body-bg": #020314,
+  "poison" : purple
 );
 
 $default-colors: (

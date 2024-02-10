@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid">
+<div class="container-fluid grid">
   <section class="home-card bg-dark rounded m-2 m-md-5">
     <section class="cover-img">
       <img src="https://www.enworld.org/attachments/dd-tashas-1604041136985-jpg.128081/" alt="image of Tasha" class="bg-dark">

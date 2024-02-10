@@ -47,17 +47,13 @@ export default {
 <style lang="scss">
 @import "./assets/scss/main.scss";
 
-:root{
-  --main-height: calc(100vh - 32px - 64px);
-}
 
 main{
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  .container-fluid{
+  .container-fluid.grid{
     display: grid;
-    height: 100%;
     flex-grow: 1;
     $flag-width: calc(10dvw - 20px);
     grid-template-columns: minmax(120px, 10dvw) minmax(auto, 150ch) $flag-width;

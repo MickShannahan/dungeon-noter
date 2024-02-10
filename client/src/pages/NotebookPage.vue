@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid py-1 py-sm-3">
+  <div class="container-fluid grid py-1 py-sm-3">
     <!-- SECTION notebook card -->
     <div class="grid-width">
       <section>

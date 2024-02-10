@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid py-3">
+<div class="container-fluid grid py-3">
 <!-- SECTION filter bar desktop-->
 <section class="grid-width mb-3 d-none d-md-grid">
   <div class="filter-bar d-flex bg-dark p-2 rounded shadow">
