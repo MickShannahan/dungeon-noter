@@ -64,12 +64,12 @@ main{
     }
   }
   @media screen and (max-width: 990px) {
-  .container-fluid{
+  .container-fluid.grid{
     grid-template-columns: 50px 1fr 3px;
   }
 }
   @media screen and (max-width: 768px) {
-  .container-fluid{
+  .container-fluid.grid{
     grid-template-columns: 3px 1fr 3px;
   }
 }
