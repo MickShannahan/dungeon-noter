@@ -5,7 +5,10 @@
   "scripts": {
     "serve": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "docs:dev": "vitepress dev vitepress",
+    "docs:build": "vitepress build vitepress",
+    "docs:preview": "vitepress preview vitepress"
   },
   "type": "module",
   "dependencies": {
@@ -30,6 +33,7 @@
     "eslint": "8.54.0",
     "eslint-plugin-vue": "^9.18.1",
     "sass": "1.69.5",
-    "vite": "5.0.2"
+    "vite": "5.0.2",
+    "vitepress": "^1.0.0-rc.44"
   }
 }
